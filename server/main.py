@@ -32,7 +32,7 @@ def generateFile():
 
     # Set device (CUDA or CPU)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")  # Should print 'cuda'
+    print(f"Using device: {device}")  # Should print 'cuda' if nvidia gpu
 
     # Define precision (use default single-precision floating-point FP32)
     torch_dtype = torch.float32
