@@ -1,0 +1,7 @@
+Flask==3.0.3
+Flask-Cors==4.0.0
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==2.3.0+cu121
+transformers==4.40.1
+scipy==1.13.0
+IPython==8.24.0
