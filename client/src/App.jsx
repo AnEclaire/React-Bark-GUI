@@ -22,8 +22,24 @@ const App = () => {
       name: state.prompt,
     };
     try {
-      const response = await axios.post("http://localhost:5000/api/generateFile", userData);
+      const response = await axios.post("http://192.168.50.185:5000/api/generateFile", userData);
       console.log(response.status, response.data);
+      if(response.status == 200) {
+        // Make a GET request to your endpoint to get the .wav file
+        const res = await axios.get(`http://192.168.50.185:5000/api/getFile?fileName=${response.data.fileName}`, {
+          responseType: 'blob' // Set responseType to 'blob' to receive binary data
+        }).then((res) => {
+          setSrc(URL.createObjectURL(res.data));
+        });
+        // Create a Blob from the response data
+        const blob = new Blob([res.data], { type: 'audio/wav' });
+
+        // Create a URL for the Blob object
+        const url = URL.createObjectURL(blob);
+
+        // Set the URL as the src state
+        setSrc(url);
+      }
     } catch (error) {
       console.log(error);
     }

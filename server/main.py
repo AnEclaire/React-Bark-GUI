@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 
 # For LLM
 import sys
+import time
 import torch
 import scipy
 from IPython.display import Audio
@@ -30,6 +31,9 @@ def generateFile():
     data = request.json
     prompt = data.get('name')
 
+    timestamp = int(time.time())
+    fileName = f"audio_{timestamp}.wav"
+
     # Set device (CUDA or CPU)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")  # Should print 'cuda' if nvidia gpu
@@ -50,7 +54,7 @@ def generateFile():
     model = model.to(device)
 
     # Define speaker voice preset
-    voice_preset = "v2/en_speaker_1"
+    voice_preset = "v2/en_speaker_9"
 
     # Define text prompt to generate audio for
     if len(sys.argv) == 2:
@@ -73,19 +77,16 @@ def generateFile():
     Audio(audio_arrays, rate=sample_rate)
 
     # Download audio output as wav file
-    scipy.io.wavfile.write("out.wav", 
+    scipy.io.wavfile.write(fileName, 
                         rate=sample_rate, 
                         data=audio_arrays)
 
-    return jsonify('ok'), 200
-    
+    return jsonify({'message': 'ok', 'fileName': fileName}), 200
 
-@app.route("/api/getFile", methods=['POST'])
+@app.route("/api/getFile", methods=['GET'])
 @cross_origin()
 def testpost():
-    data = request.json
-    fileName = data.get('name')
-    fileName = fileName.toString()
+    fileName = request.args.get('fileName')
     return send_file(fileName, mimetype="audio/wav")
 
 if __name__ == "__main__":
