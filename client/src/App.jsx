@@ -22,11 +22,11 @@ const App = () => {
       name: state.prompt,
     };
     try {
-      const response = await axios.post("http://localhost:5000/api/generateFile", userData);
+      const response = await axios.post("https://git.himawari.app/api/generateFile", userData);
       console.log(response.status, response.data);
       if(response.status == 200) {
         // Make a GET request to your endpoint to get the .wav file
-        const res = await axios.get(`http://localhost:5000/api/getFile?fileName=${response.data.fileName}`, {
+        const res = await axios.get(`https://git.himawari.app/api/getFile?fileName=${response.data.fileName}`, {
           responseType: 'blob' // Set responseType to 'blob' to receive binary data
         }).then((res) => {
           setSrc(URL.createObjectURL(res.data));
