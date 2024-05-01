@@ -5,38 +5,89 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card, .card2 {
+  padding: 2em;
+  width: calc(50% - 20px); /* Set width to 50% of the container minus margin */
+  margin-bottom: 20px; /* Margin between the cards */
+}
+.instruction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.instruction-grid div {
+  border: 1px solid #ccc;
+  padding: 4px;
 }
 
 .card {
-  padding: 2em;
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.card2 {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+text-input {
+  height: 40px; /* Set the height of the text input */
+  width: calc(100% - 70px); /* Adjust width to accommodate button */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+textarea {
+  resize: none;
+}
+
+.input-label {
+  position: relative;
+}
+
+.input-label input {
+  height: 40px;
+  width: 245px;
+  padding-right: 50px;
+}
+
+.input-label button {
+  right: 5px; /* Adjust this value to position the button horizontally */
+  margin-left: 10px;
+}
+
+.generate-button {
+  width: 40px; /* Set the width of the button */
+  height: 40px; /* Set the height of the button */
+  background-color: #524e4e; /* Button background color */
+  border: 1px solid #ccc;
+  display: inline-block;
+  width:  245px;
+  cursor: pointer;
+}
+
+
+.generate-button:disabled {
+  width: 40px; /* Set the width of the button */
+  height: 40px; /* Set the height of the button */
+  background-color: #524e4e; /* Button background color */
+  border: 1px solid #ccc;
+  display: inline-block;
+  width:  245px;
+  cursor: pointer;
+  opacity: 0.5; /* Reduce opacity to visually indicate button is disabled */
+  cursor: not-allowed; /* Change cursor to not-allowed */
 }

@@ -30,6 +30,7 @@ def users():
 def generateFile():
     data = request.json
     prompt = data.get('name')
+    voice = data.get('voice')
 
     timestamp = int(time.time())
     fileName = f"audio_{timestamp}.wav"
@@ -54,7 +55,7 @@ def generateFile():
     model = model.to(device)
 
     # Define speaker voice preset
-    voice_preset = "v2/en_speaker_9"
+    voice_preset = voice
 
     # Define text prompt to generate audio for
     if len(sys.argv) == 2:
